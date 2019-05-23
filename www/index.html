@@ -51,50 +51,62 @@
                 <div id="main">
                     <input type="text" class="form-control" id="city-name" placeholder="Enter City">
 
-                    <button id="search-weather-btn" class="btn btn-primary" type="submit">Get report</button>
-
-                    <button id="get-location-btn" class="btn btn-primary" type="submit">Get current
-                        location</button>
-
-                    <button id="search-local-btn" class="btn btn-primary" type="submit" style="display:none;">Get local
+                    <div class="row"></div>
+                    <button id="search-weather-btn" class="btn btn-primary btn-lg btn-block" type="submit">Get
                         report</button>
+                </div>
 
-                    <button id="loading-btn" class="btn btn-primary" type="button" disabled style="display:none;">
+                <div class="row">
+                    <button id="get-location-btn" class="btn btn-primary btn-lg btn-block" type="submit">Get current
+                        location</button>
+                </div>
+
+                <div class="row">
+                    <button id="search-local-btn" class="btn btn-primary btn-lg btn-block" type="submit"
+                        style="display:none;">Get local
+                        report</button>
+                </div>
+
+                <div class="row">
+                    <button id="loading-btn" class="btn btn-primary btn-lg btn-block" type="button" disabled
+                        style="display:none;">
                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                         Loading...
                     </button>
                 </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="loader" class="d-flex justify-content-center">
+            <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
         </div>
 
-        <div class="row">
-            <div id="loader" class="d-flex justify-content-center">
-                <div class="spinner-grow" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+    </div>
 
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="weather-card one">
-                    <div class="top">
-                        <div class="wrapper">
-                            <div class="mynav">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
-                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
-                            </div>
-                            <h1 id="condition" class="heading"></h1>
-                            <h3 id="location" class="location"></h3>
-                            <p class="temp">
-                                <span id="temp" class="temp-value"></span>
-                                <span id="deg" class="deg"></span>
-                                <a href="javascript:;"><span class="temp-type">F</span></a>
-                            </p>
+    <div class="row">
+        <div class="col">
+            <div class="weather-card one">
+                <div class="top">
+                    <div class="wrapper">
+                        <div class="mynav">
+                            <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
+                            <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
                         </div>
+                        <h1 id="condition" class="heading"></h1>
+                        <h3 id="location" class="location"></h3>
+                        <p class="temp">
+                            <span id="temp" class="temp-value"></span>
+                            <span id="deg" class="deg"></span>
+                            <a href="javascript:;"><span class="temp-type">F</span></a>
+                        </p>
                     </div>
-                    <!-- <div class="bottom">
+                </div>
+                <!-- <div class="bottom">
                         <div class="wrapper">
                             <ul class="forecast">
                                 <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
@@ -115,9 +127,9 @@
                             </ul>
                         </div>
                     </div> -->
-                </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
