@@ -9,6 +9,12 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.elshaabany.unuchallenge"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.elshaabany.unuchallenge"
+    },
+    "cordova-plugin-request-location-accuracy": {
+      "PACKAGE_NAME": "com.elshaabany.unuchallenge"
     }
   },
   "dependent_plugins": {}
