@@ -44,6 +44,14 @@ body {
     
 }
 
+#main {
+    margin-top: 24px;
+}
+
+#city-name {
+    margin-bottom: 18px;
+}
+
 h1 {
     font-size:24px;
     font-weight:normal;
@@ -56,9 +64,9 @@ h1 {
 
 .weather-card {
     margin: 60px auto;
-    height: 740px;
+    height: auto;
     width: 100%;
-    background: #fff;
+    background: #ffffff;
     box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
     overflow: hidden;
   }

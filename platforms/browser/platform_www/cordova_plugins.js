@@ -5,7 +5,8 @@ module.exports.metadata =
 {
     "cordova-plugin-whitelist": "1.3.3",
     "cordova.plugins.diagnostic": "4.0.12",
-    "cordova-plugin-request-location-accuracy": "2.3.0"
+    "cordova-plugin-request-location-accuracy": "2.3.0",
+    "cordova-plugin-geolocation": "4.0.1"
 }
 // BOTTOM OF METADATA
 });

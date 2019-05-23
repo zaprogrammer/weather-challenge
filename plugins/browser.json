@@ -15,6 +15,9 @@
     },
     "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.elshaabany.unuchallenge"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.elshaabany.unuchallenge"
     }
   },
   "dependent_plugins": {}

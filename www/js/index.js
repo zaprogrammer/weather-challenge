@@ -17,19 +17,32 @@
  * under the License.
  */
 var platform;
+var API_URL = "https://api.openweathermap.org/data/2.5/weather";
+var OpenWeather_APPID = "54145e34e64723b664c1d0a2e51e6ac0";
 
 $(document).ready(function () {
 
-    $("#search-weather").click(function () {
+    $("#search-weather-btn").click(function () {
 
         var cityName = $("#city-name").val();
 
-        if (platform !== "browser")
+        if (platform !== "browser") {
             app.requestLocationAccuracy();
 
+        }
 
-        app.fetchWeatherData("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=54145e34e64723b664c1d0a2e51e6ac0");
-    })
+        app.fetchWeatherData(API_URL + "?q=" + cityName + "&appid=" + OpenWeather_APPID);
+    });
+
+    $("#get-location-btn").click(function () {
+        if (platform !== "browser") {
+            app.requestLocationAccuracy();
+        }
+    });
+
+    $("#search-local-btn").click(function () {
+        getWeatherByLocal();
+    });
 });
 
 
@@ -38,14 +51,6 @@ var app = {
     initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
-
-
-
-    //////////////////////////////////////////////////
-
-
-    //////////////////////////////////////////////////
-
 
     // deviceready Event Handler
     //
@@ -57,7 +62,7 @@ var app = {
 
     fetchWeatherData: function (url) {
         $('#loading-btn').show();
-        $('#search-weather').hide();
+        $('#search-weather-btn').hide();
 
         $.ajax({
             type: "GET",
@@ -67,20 +72,17 @@ var app = {
             error: app.onError,
             complete: function () {
                 $('#loading-btn').hide();
-                $('#search-weather').show();
+                $('#search-weather-btn').show();
             }
         });
     },
 
     onSuccess: function (data) {
-
         console.log(data);
 
         $("#condition").text(data.weather[0].main);
         $("#location").text(data.name + ', ' + data.sys.country);
         $("#temp").text(data.main.temp);
-
-
     },
 
     onError: function (data, textStatus, errorThrown) {
@@ -106,7 +108,7 @@ var app = {
                 }
                 break;
             case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-                requestLocationAuthorization();
+                app.requestLocationAuthorization();
                 break;
             case cordova.plugins.diagnostic.permissionStatus.DENIED:
                 if (platform === "android") {
@@ -140,6 +142,7 @@ var app = {
             if (canRequest) {
                 cordova.plugins.locationAccuracy.request(function () {
                     handleSuccess("Location accuracy request successful");
+
                 }, function (error) {
                     app.onLocationError("Error requesting location accuracy: " + JSON.stringify(error));
                     if (error) {
@@ -162,6 +165,58 @@ var app = {
         });
     },
 
+    getWeatherByLocal() {
+        navigator.geolocation.getCurrentPosition(app.geolocationSuccess, app.geolocationError);
+    },
+
+    geolocationSuccess: function (position) {
+        // alert('Latitude: '          + position.coords.latitude          + '\n' +
+        //       'Longitude: '         + position.coords.longitude         + '\n'
+        // );
+
+        app.getWeatherByGeoLocation(position.coords.latitude, position.coords.longitude);
+    },
+
+    // onError Callback receives a PositionError object
+    //
+    geolocationError: function (error) {
+        alert('code: ' + error.code + '\n' +
+            'message: ' + error.message + '\n');
+    },
+
+    getWeatherByGeoLocation: function (long, lat) {
+
+        var url = API_URL + "?lat=" + lat + '&lon=' + long + '&appid=' + OpenWeather_APPID + '&units=imperial';
+
+        $('#loading-btn').show();
+        $('#search-weather-btn').hide();
+
+        $.ajax({
+            type: "GET",
+            dataType: 'jsonp',
+            url: url,
+            success: app.onWeatherLocationSuccess,
+            error: app.onWeatherLocationError,
+            complete: function () {
+                $('#loading-btn').hide();
+                $('#search-weather-btn').show();
+            }
+        });
+    },
+
+    onWeatherLocationSuccess: function (data) {
+        console.log(data);
+
+        $("#condition").text(data.weather[0].main);
+        $("#location").text(data.name + ', ' + data.sys.country);
+        $("#temp").text(data.main.temp);
+    },
+
+    onWeatherLocationError: function (data, textStatus, errorThrown) {
+        console.error('Data: ' + JSON.stringify(data));
+        console.error('Status: ' + textStatus);
+        console.error('Error: ' + errorThrown);
+    },
 };
 
 app.initialize();

@@ -44,6 +44,14 @@ body {
     
 }
 
+#main {
+    margin-top: 24px;
+}
+
+#city-name {
+    margin-bottom: 18px;
+}
+
 h1 {
     font-size:24px;
     font-weight:normal;
